@@ -50,35 +50,34 @@ class Program
         }
     }
 
+    // Method to view all the deployed rovers on the plateau
     static void ViewDeployedRovers(Plateau plateau)
     {
         Thread.Sleep(1500);
         Console.WriteLine("");
         Console.WriteLine("Rovers on the plateau:");
 
-        // Harita matrisini oluşturuyoruz
+        // Create a map matrix to represent the plateau with deployed rovers
         char[,] map = new char[plateau.Width, plateau.Height];
 
         foreach (IRover rover in plateau.Rovers)
         {
-            // Gezginin koordinatlarını alıyoruz
+            // Get the coordinates and d.rectşon of the rover
             int x = rover.XCoordinate;
             int y = rover.YCoordinate;
-
-            // Gezginin yönünü alıyoruz
             char direction = rover.Direction;
 
-            // Haritada gezginin konumuna X karakterini ekliyoruz
+            // Mark the rover's position on the map with the 'X' character
             map[x, y] = 'X';
         }
 
-        // Haritayı konsola çizdiriyoruz
+        // Draw the map on the console
         for (int y = plateau.Height - 1; y >= 0; y--)
         {
             for (int x = 0; x < plateau.Width; x++)
             {
                 char cell = map[x, y];
-                if (cell == '\0') // Harita boşsa nokta karakterini çizdiriyoruz
+                if (cell == '\0') 
                     Console.Write('.');
                 else
                     Console.Write(cell);
@@ -88,6 +87,7 @@ class Program
         }
     }
 
+    // Method to deploy a new rover on the plateau
     static void DeployRover(Plateau plateau)
     {
         Console.WriteLine("Enter the coordinates and direction of the new rover (2 3 E):");
@@ -118,6 +118,7 @@ class Program
         Console.WriteLine("The rover has been successfully deployed.");
     }
 
+    // Method to move a selected rover on the plateau
     static void MoveRover(Plateau plateau)
     {
         Console.WriteLine("Select a rover to move:");

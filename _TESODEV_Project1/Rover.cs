@@ -1,11 +1,16 @@
+using System;
+using System.Threading;
+
 namespace TESODEV_Project1;
 
 public class Rover : RoverBase
 {
+    // Constructor to the rovers position and direction
     public Rover(int x, int y, char direction) : base(x, y, direction)
     {
     }
 
+    // Method to rotate rovers 90 degrees to the left
     public override void RotateLeft()
     {
         switch (Direction)
@@ -25,6 +30,7 @@ public class Rover : RoverBase
         }
     }
 
+    // Method to rotate rovers 90 degrees to the right
     public override void RotateRight()
     {
         switch (Direction)
@@ -44,8 +50,10 @@ public class Rover : RoverBase
         }
     }
 
+    // Method to move the rover
     public override void MoveForward(Plateau plateau)
     {
+        // Calculate the rovers new location
         int newX = XCoordinate;
         int newY = YCoordinate;
 
@@ -65,10 +73,13 @@ public class Rover : RoverBase
                 break;
         }
 
+        // Check the rovers new location is within in the plateau
         if (plateau.IsInsidePlateau(newX, newY))
         {
+            // Check if there is another rover at the new position
             IRover existingRover = plateau.GetRoverAtPosition(newX, newY);
 
+            // if the new position is empty, move the rover
             if (existingRover == null)
             {
                 XCoordinate = newX;
@@ -76,14 +87,15 @@ public class Rover : RoverBase
                 Thread.Sleep(1500);
                 Console.WriteLine($"New position of the rover: ({XCoordinate}, {YCoordinate}) Direction: {Direction}");
             }
+            // if the new position is not empty, write collision and remove the rovers on plateau
             else
             {
-                // Gezgin çarpışması işleme (her iki gezgin de patlar)
                 plateau.RemoveRover(this);
                 plateau.RemoveRover(existingRover);
                 Console.WriteLine("Collision! Both rovers exploded!");
             }
         }
+        // if the rovers new location is 
         else
         {
             Console.WriteLine("Rover cannot move outside of the plateau boundaries.");
