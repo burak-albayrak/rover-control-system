@@ -10,11 +10,7 @@ This project implements a rover control system that simulates the movement of ro
 
 To deploy a new rover onto the plateau:
 
-1. Run the program:
-
-   ```bash
-   dotnet run
-   ```
+1. Run the program.
 
 2. Enter the coordinate system (X Y) for the plateau when prompted.
 
